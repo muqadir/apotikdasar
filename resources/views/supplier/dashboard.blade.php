@@ -90,6 +90,7 @@
 <script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/toastr/toastr.min.js') }}"></script>
 <script>
+
     $(document).ready(function(){
         loaddata()
     });
@@ -126,6 +127,7 @@
         })
     }
 
+    
     function number(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode
         if (charCode > 31 && (charCode < 48 || charCode > 57))
