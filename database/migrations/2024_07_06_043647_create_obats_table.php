@@ -18,7 +18,7 @@ class CreateObatsTable extends Migration
             $table->string('name', 25);
             $table->string('kode', 8);
             $table->string('dosis', 20);
-            $table->string('indikasi', 5);
+            $table->string('indikasi', 50);
             $table->unsignedBigInteger('kategori_id');
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
             $table->unsignedBigInteger('satuan_id');

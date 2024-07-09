@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StockobatController;
 use App\Http\Controllers\AdminPanelController;
 
 /*
@@ -41,8 +43,20 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::post('supplier/updates', [SupplierController::class, 'updates'])->name('supplier.updates');
     Route::post('supplier/edits', [SupplierController::class, 'edits'])->name('supplier.edits');
     Route::post('supplier/hapus', [SupplierController::class, 'destroy'])->name('supplier.hapus');
+    
+    Route::get('obat/', [ObatController::class, 'index'])->name('obat.index');
+    Route::post('obat/store', [ObatController::class, 'store'])->name('obat.store');
+    Route::post('obat/updates', [ObatController::class, 'updates'])->name('obat.updates');
+    Route::post('obat/edits', [ObatController::class, 'edits'])->name('obat.edits');
+    Route::post('obat/hapus', [ObatController::class, 'destroy'])->name('obat.hapus');
 
+    Route::get('stock/', [StockobatController::class, 'index'])->name('stock.index');
+    Route::post('stock/store', [StockobatController::class, 'store'])->name('stock.store');
+    Route::post('stock/updates', [StockobatController::class, 'updates'])->name('stock.updates');
+    Route::post('stock/edits', [StockobatController::class, 'edits'])->name('stock.edits');
+    Route::post('stock/hapus', [StockobatController::class, 'destroy'])->name('stock.hapus');
 
+    Route::post('getobat', [StockobatController::class, 'getObat'])->name('stock.getobat');
     // Manajemen User
     Route::get('management/', [AdminPanelController::class, 'index'])->name('management.index');
     Route::post('management/store', [AdminPanelController::class, 'store'])->name('management.store');
