@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Obat;
 use App\Models\Stockobat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -14,11 +15,11 @@ class StockobatController extends Controller
 {
 
     public function index() {
-        // $obat = Obat::where('ready','N')->get();
-        $obat = Obat::select('id','name')->get();
+        $obat = Obat::where('ready','N')->get();
+        // $obat = Obat::select('id','name')->get();
         $stock = Stockobat::join()->get();
         if(request()->ajax()){
-            return stocktables()->of($stock)
+            return datatables()->of($stock)
             ->addColumn('aksi', function($stock){
                 $button = '<button class="edit btn btn-warning" id="'. $stock->id.'" name="edit"> Edit</button>';
                 $button .= '<button class="hapus btn btn-danger" id="'. $stock->id.'" name="hapus">Del</button>';
@@ -80,23 +81,24 @@ class StockobatController extends Controller
         $save = $data->save();
 
         if ($save) {
+            DB::table('obats')->where('id', $request->obat_id)->update(['ready' => 'Y']);
             return response()->json(['text' => 'Data Stockobat berhasil disimpan'], 200);
         } else {
             return response()->json(['text' => 'Data Stockobat gagal disimpan'], 422);
         }
     }
     public function getObat(Request $request) {
-        dd($request()->all());
-        // $data = Stockobat::find('obat_id',$request->id)>first();
-        // $null = [
-        //     'stock' => 0
-        // ];
+        // dd($request()->all());
+        $data = Stockobat::find('obat_id',$request->id)>first();
+        $null = [
+            'stock' => 0
+        ];
 
-        // if ($data != null) {
-        //     return response()->json(['data' => $data]); 
-        // } else {
-        //     return response()->json(['data' => $data]);
-        // }
+        if ($data != null) {
+            return response()->json(['data' => $data]); 
+        } else {
+            return response()->json(['data' => $null]);
+        }
     }
     public function edits(Request $request) {
         $data = Stockobat::find($request->id);

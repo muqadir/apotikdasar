@@ -53,7 +53,7 @@
 
                     <div class="form-group">
                         <label for="obat">Nama</label>
-                        <select name="obat_id" id="obat" class="form-control rounded">
+                        <select name="obat_id" id="obat_id" class="form-control rounded">
                             <option value="">Pilih Obat</option>
                             @foreach ($obat as $item )
                             <option value="{{ $item->id }}">{{ $item->name }}</option>     
@@ -67,7 +67,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="inlineForm" class="mr-sm-2">Stock Awal</label>
+                            <label for="stocklama" class="mr-sm-2">Stock Awal</label>
                             <input type="text" onkeypress="return number(event)"  class="form-control rounded" readonly autocomplete="off" name="stocklama" id="stocklama"  value="0" class="form-control">
                             <input type="text" class="form-control rounded" hidden autocomplete="off" name="id" id="id" class="form-control">
                         </div>
@@ -124,10 +124,10 @@
     </div>
 </x-app-layout>
 @push('js')
-{{-- <script src="{{ asset('datatables/js/jquery.js') }}"></script>
-<script src="{{ asset('datatables/js/jquery.dataTables.js') }}"></script> --}}
-<script src="{{ asset('adminlte/plugins/jquery/jquery.js') }}"></script>
-<script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('datatables/js/jquery.js') }}"></script>
+<script src="{{ asset('datatables/js/jquery.dataTables.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/plugins/jquery/jquery.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.js') }}"></script> --}}
 <script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/toastr/toastr.min.js') }}"></script>
 <script>
@@ -145,6 +145,12 @@
             ajax: {
                 url : "{{ route('stock.index') }}"
             },
+            columnDefs: [
+                {
+                    targets: 10, 
+                    className: 'dt-body-nowrap' 
+                }
+            ],
 
             columns: [
                 {data: null,
@@ -213,12 +219,16 @@
             success : function(res) {
                 console.log(res);
                 $('#id').val(res.id)
-                $('#name').val(res.name)
-                $('#kode').val(res.kode)
-                $('#dosis').val(res.dosis)
-                $('#indikasi').val(res.indikasi)
-                $('#kategori_id').val(res.kategori_id)
-                $('#satuan_id').val(res.satuan_id)
+                $('#obat_id').val(res.id)
+                 $('#namaobat').val(res.namaobat)
+                 $('#masuk').val(res.masuk)
+                 $('#keluar').val(res.keluar)
+                 $('#jual').val(res.jual)
+                 $('#beli').val(res.beli)
+                 $('#expired').val(res.expired)
+                 $('#stock').val(res.stock)
+                 $('#keterangan').val(res.keterangan)
+                 $('#admin').val(res.admin)
                 $('#btn-tambah').click()
             },
             error: function(xhr){
@@ -285,7 +295,7 @@ $(document).on('change', '#obat', function() {
             _token: "{{ csrf_token() }}"  // CSRF token for Laravel
         },
         success: function(res) {  // Success callback function
-            $('#stocklama').val(res.data.stock);  // Set value to #stocklama element
+            $('#stocklama').val(res.data.data.stock);  // Set value to #stocklama element
             console.log(res);  // Log the response to the console
         },
         error: function(xhr) {  // Error callback function

@@ -16,6 +16,7 @@ class Obat extends Model
         'indikasi',
         'kategori_id',
         'satuan_id',
+        'ready',
     ];
 
     public static function join()

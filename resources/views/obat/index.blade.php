@@ -125,12 +125,12 @@
             ajax: {
                 url : "{{ route('obat.index') }}"
             },
-            // columnDefs: [
-            //     {
-            //         targets: 7, // Mengarahkan ke kolom kedua (kolom 'aksi')
-            //         className: 'dt-body-nowrap' // Mencegah pematahan baris
-            //     }
-            // ],
+            columnDefs: [
+                {
+                    targets: 7, // Mengarahkan ke kolom kedua (kolom 'aksi')
+                    className: 'dt-body-nowrap' // Mencegah pematahan baris
+                }
+            ],
             columns: [
                 {data: null,
                 "sortable": false,
