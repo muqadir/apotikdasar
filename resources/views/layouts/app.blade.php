@@ -157,12 +157,7 @@
                           <p>Obat</p>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="fas fa-shopping-basket nav-icon"></i>
-                          <p>Kapasitas Produksi</p>
-                        </a>
-                      </li>
+                     
                       <li class="nav-item">
                         <a href="{{ route('stock.index') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
@@ -176,7 +171,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('penjualan.index') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Data Penjualan</p>
                         </a>

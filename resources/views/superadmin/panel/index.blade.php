@@ -561,9 +561,9 @@ function loadDataPermission(){
     $('#tblpermission').DataTable({
         serverside: true,
         processing: true,
-        // language : {
-        //         url: "{{ asset('js/bahasa/id.json') }}"
-        // },
+        language : {
+                url: "{{ asset('adminlte/plugins/datatables/bahasa/id.json') }}"
+        },
         ajax: {
             url : "{{ route('management.loadpermission')}}"
         },
@@ -627,9 +627,9 @@ function loadDataRole(){
     $('#tblrole').DataTable({
         serverside: true,
         processing: true,
-        // language : {
-        //         url: "{{ asset('js/bahasa/id.json') }}"
-        // },
+        language : {
+                url: "{{ asset('adminlte/plugins/datatables/bahasa/id.json') }}"
+        },
         ajax: {
             url : "{{ route('management.loadrole')}}"
         },

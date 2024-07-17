@@ -142,6 +142,9 @@
             processing: true,
             autoWidth: false,
             scrollX: true,
+            language : {
+                url: "{{ asset('adminlte/plugins/datatables/bahasa/id.json') }}"
+                },
             ajax: {
                 url : "{{ route('stock.index') }}"
             },
@@ -207,7 +210,7 @@
     
 
     $(document).on('click', '.edit', function() {
-        $('#forms').attr('action', "{{ route('obat.updates') }}")
+        $('#forms').attr('action', "{{ route('stock.updates') }}")
         let id = $(this).attr('id')
         $.ajax({
             url : "{{ route('stock.edits') }}",

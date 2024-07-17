@@ -83,8 +83,6 @@
     </div>
 </x-app-layout>
 @push('js')
-{{-- <script src="{{ asset('datatables/js/jquery.js') }}"></script>
-<script src="{{ asset('datatables/js/jquery.dataTables.js') }}"></script> --}}
 <script src="{{ asset('adminlte/plugins/jquery/jquery.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
@@ -101,6 +99,9 @@
             processing: true,
             autoWidth: false,
             scrollX: true,
+            language : {
+                url: "{{ asset('adminlte/plugins/datatables/bahasa/id.json') }}"
+                },
             ajax: {
                 url : "{{ route('supplier.index') }}"
             },

@@ -123,4 +123,27 @@ class StockobatController extends Controller
             return response()->json(['text' => 'Data Stockobat gagal dihapus'], 500);
         }
     }
+
+    private function data( array $data) 
+    {
+        $data = [
+            'obat_id' => $data['obat_id'], 
+            'masuk' => $data['masuk'],
+            'keluar' => $data['keluar'],
+            'jual' => $data['jual;'],        
+            'beli' => $data['beli;'],        
+            'expired' => $data['expired'], 
+            'stock' => $data['stock'],
+            'keterangan' => $data['keterangan'], 
+            'user_id ' => Auth::user()->id,
+        ];
+     }
+
+     public function getDataObat(Request $request) {
+        
+
+         $data = Stockobat::where('obat_id', $request->id)->first();
+         return response()->json($data);
+     }
+     
 }
