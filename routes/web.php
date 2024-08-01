@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\StockobatController;
 use App\Http\Controllers\AdminPanelController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,13 +58,23 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
 
     // Route::resource('penjualan', PenjualanController::class);
     
+    Route::get('belanja/', [PembelianController::class, 'index'])->name('belanja.index');
+
+
     Route::get('penjualan/', [PenjualanController::class, 'index'])->name('penjualan.index');
     Route::post('penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
     Route::post('penjualan/hapus', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
     Route::get('penjualan/datapenjualan', [PenjualanController::class, 'DataPenjualan'])->name('penjualan.datapenjualan');
+    Route::post('penjualan/cetak', [PenjualanController::class, 'CetakNota'])->name('penjualan.cetak');
 
     Route::post('getobat', [StockobatController::class, 'getObat'])->name('stock.getobat');
     Route::post('getdataobat', [StockobatController::class, 'getDataObat'])->name('stock.getdataobat');
+    Route::post('gethitung', [PenjualanController::class, 'getHitung'])->name('penjualan.gethitung');
+
+    
+    Route::get('pembayaran/', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::post('pembayaran.store', [PembayaranController::class, 'store'])->name('pembayaran.store');
+    Route::post('pembayaran/cetak', [PembayaranController::class, 'CetakNota'])->name('pembayaran.cetak');
     // Manajemen User
     Route::get('management/', [AdminPanelController::class, 'index'])->name('management.index');
     Route::post('management/store', [AdminPanelController::class, 'store'])->name('management.store');

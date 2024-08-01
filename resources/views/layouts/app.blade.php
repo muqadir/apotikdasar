@@ -171,7 +171,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{ route('penjualan.index') }}" class="nav-link">
+                        <a href="{{ route('pembayaran.index') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Data Penjualan</p>
                         </a>
@@ -203,13 +203,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('penjualan.index') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Penjualan Barang</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('belanja.index') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Pembelian Barang</p>
                         </a>

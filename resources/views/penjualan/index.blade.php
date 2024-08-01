@@ -22,13 +22,13 @@
 
                 <div class="row">
                     <div class="col-md-4">
-          
+        
                         <div class="card card-danger">
                             <div class="card-header">
                             <h3 class="card-title"><i class="fas fa-user-edit mr-1"></i> Data Pasien</h3>
                             </div>
                             <div class="card-body">
-                               
+                            
                                 <hr class="w-auto h-1  bg-red-700 border-red-100 rounded mb-4 pt-0">
                                 <form action="{{ route('penjualan.store') }}" method="post" id="pasienform">
                                     @csrf
@@ -60,14 +60,14 @@
                                         </div>
                                     
                                     </div>
-                               
-                               
+                            
+                            
                                 <hr class="w-auto h-1  bg-red-700 border-red-100 rounded mt-4">
                             
                             </div>
                         </div>
                     </div>
-                    
+                        
                     <div class="col-md-8">
                         <div class="card card-primary">
                             <div class="card-header">
@@ -95,15 +95,15 @@
                                         <input type="text" onkeypress="return number(event)"  class="form-control rounded"  autocomplete="off" name="nota" id="nota" value="{{ $nomor }}" readonly class="form-control">
                                     </div>
                                     <div class="form-group col-md-3">
-                                       
+                                    
                                             <label class="mr-sm-2">Tanggal</label>
-                                              <div class="input-group date" id="tanggal" data-target-input="nearest">
-                                                  <input type="text" class="form-control datetimepicker-input"  id="tanggal" name="tanggal" data-target="#tanggal" value="{{ $tanggals }}">
-                                                  <div class="input-group-append" data-target="#tanggal" data-toggle="datetimepicker">
-                                                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                  </div>
-                                              </div>
-                                          
+                                            <div class="input-group date" id="tanggal" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input"  id="tanggal" name="tanggal" data-target="#tanggal" value="{{ $tanggals }}">
+                                                <div class="input-group-append" data-target="#tanggal" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="row">
@@ -135,7 +135,7 @@
                                     <div class="d-flex  w-80">
                                             <button type="submit" class="btn btn-block btn-outline-warning btn-md mx-1 my-1 rounded-md w-32"  id="tambah" name="tambah"><i class="far fa-save"></i> Save</button>
                                         </form>
-                                            <button type="submit" id="simpan" class="btn btn-block btn-outline-success btn-md mx-1 my-1 rounded-md w-36"><i class="fas fa-plus"></i>Tambah Obat</button>
+                                            <button type="button" id="buka"  name="buka"  class="btn btn-block btn-outline-success btn-md mx-1 my-1 rounded-md w-36"><i class="fas fa-plus"></i>Tambah Obat</button>
                                         
                                     </div>
                                 </div>
@@ -163,26 +163,102 @@
 
                                         </div>
                                         <div class="col-3">
-                                            {{-- <form action="" method="post">
+                                            {{-- <form action="{{ route('penjualan.cetak') }}" method="post"> --}}
                                                 @csrf
-                                                <input type="text" name="kwitansi" id="kwitansi" class=" form-control rounded " value="nomor" onkeypress="return number(event)" maxlength="12">
-                                            </form> --}}
-                                            <button type="submit" id="btn-bayar" name="btn-bayar" data-target="#modal-secondary" class="btn btn-danger"><i class="fas fa-money-bill-wave"></i>Prosees </button>
+                                                <input type="text" name="kwitansi" id="kwitansi" class="form-control rounded " hidden value="{{ $nomor }}" onkeypress="return number(event)" maxlength="15">
+                                                
+                                                <button type="button" id="cetak" name="cetak" class="btn btn-danger float-left rounded"  target="_blank">
+                                                    <i class="fas fa-file-pdf mr-2"></i>Cetak Slip
+                                                </button>
+                                            {{-- </form> --}}
+                                            
+                                            <button type="button" id="btn-bayar" name="btn-bayar" class="btn btn-danger rounded" data-toggle="modal" data-target="#modal-success">
+                                                <i class="fas fa-money-bill-wave"></i>Prosees
+                                            </button>
+                                            <button class="transaksiBaru btn btn-warning" id="transaksiBaru" name="transaksiBaru"> Transaksi Baru</button>
+                                        
                                         </div>
+                                        
+                                        <div class="modal fade" id="modal-success">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content bg-emerald-100">
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title"><h2>Transaksi Pembayaran</h2></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                
+                                                        {{-- <form action="{{ route('pembayaran.store') }}" method="post" id="pembayaran"> --}}
+                                                                @csrf
+                                                            <div class="bg-transparent w-auto rounded  mx-2  my-0">FORM PERMBAYARAN
+                                                                <hr class="w-auto h-1 my-1 bg-red-700 border-0 rounded">
+                                                            </div>
+                                
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="note" class="mr-sm-2">Nota Pemjualan</label>
+                                                                    <input type="text" onkeypress="return number(event)"  class="form-control rounded" readonly autocomplete="off" name="modalnota" id="modalnota" class="form-control" value="">
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="kasir" class="mr-sm-2">Kasir : </label>
+                                                                    <input type="text" onkeypress="return number(event)"  class=" rounded bg-transparent border-none  w-full focus:outline-none" readonly autocomplete="off"  value="{{ Auth::user()->name }}"> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="totalharga">Total Harga</label>
+                                                                <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="totalharga" id="totalharga" class="form-control" value="0">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="supplier">Diskon</label>
+                                                                <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="modaldiskon" id="modaldiskon" class="form-control" value="0">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="supplier">Jumlah Yang harus di bayar</label>
+                                                                <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="harusbayar" id="harusbayar" class="form-control" value="0">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="supplier">Jumlah Bayar</label>
+                                                                <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" autocomplete="off" name="jumlahdibayar" id="jumlahdibayar" class="form-control" value="0">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="supplier">Uang Kembali</label>
+                                                                <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="kembali" id="kembali" class="form-control" value="0">
+                                                            </div>
+                                                           
+                                                           
+                                                            
+                                                            <div class="modal-footer  d-flex justify-content-end ">
+                                                                <div class="d-flex justify-items-center  ">
+                                                                        <button type="button" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md" data-dismiss="modal" id="btn-tutup">Close</button>
+                                                                        
+                                                                        <button type="submit" id="simpanbayar" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md">Bayar </button>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    
+                                                    </div>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
                             </div>
-                          
+                        
                         </div>
                     </div>
-                    
+                        
                 </div>
                 
             </div>
         </div>
-
-
-         </div>
+    </div>
 </x-app-layout>
 @push('js')
 {{-- <script src="{{ asset('datatables/js/jquery.js') }}"></script>
@@ -200,6 +276,15 @@
 $(document).ready(function(){
     $('#obat_id').select2();
     // tabelpenjualan
+    $('tambah').hide();
+    $('#buka').hide();
+    $('#transaksiBaru').hide();
+    $('#cetak').hide();
+    $(document).on('click', '#transaksiBaru', function() {
+                location.reload(); // Me-refresh halaman
+    });
+
+    // $('#btn-bayar').hide();
 });
         //Date picker
      $('#tanggal').datetimepicker({
@@ -207,22 +292,6 @@ $(document).ready(function(){
        
     });
 
-    
-    
-    // const $qtyInput = $('#qty');
-    // let qty = parseInt($qtyInput.val());
-
-    // $('#increment-btn').on('click', function() {
-    //     qty++;
-    //     $qtyInput.val(qty);
-    // });
-
-    // $('#decrement-btn').on('click', function() {
-    //     if (qty > 0) {
-    //         qty--;
-    //         $qtyInput.val(qty);
-    //     }
-    // });
     function updateQuantity(increment) {
             const $qtyInput = $('#qty');
             let qty = parseInt($qtyInput.val(), 10);
@@ -273,6 +342,10 @@ $(document).ready(function(){
         return true;
     }
 
+    $(document).on('click', '#buka', function() {
+        $('#buka').hide();
+    });
+    
     $('#obat_id').change(function () {
         let id = $(this).val();
         $.ajax({
@@ -312,11 +385,15 @@ $(document).ready(function(){
 
             success: function (res) {
                 console.log(res.text);
-                 
-                // $('#btn-tutup').click();
-                // $('#forms')[0].reset();
+                 $('#obat_id').prop('disabled', true);
+                 $('#qty').attr('disabled', true);
+                 $('#diskon').attr('disabled', true);
+                 $('#decrement-btn').attr('disabled', true);
+                $('#increment-btn').attr('disabled', true);
                 toastr.success(res.text, 'Success'); // Menampilkan notifikasi toastr sukses
                 $('#tabelpenjualan').DataTable().ajax.reload();
+                // $('#btn-bayar').show();
+                $('#buka').hide();
             },
             error: function(xhr){
                 console.log(xhr);
@@ -337,31 +414,63 @@ $(document).ready(function(){
         ajax: {
             url: "{{ route('penjualan.datapenjualan') }}",
             data: function (d) {
-                d.id = $('#nota').val(); // Add parameter for the request
+                d.id = $('#nota').val(); 
             },
             error: function (xhr, error, thrown) {
-                console.log(xhr.responseText); // Log any errors for debugging
+                console.log(xhr.responseText); 
             }
         },
         columns: [
             {
                 data: null,
                 sortable: false,
-                render: function (data, type, row, meta) {
+                render: function (data, type, row, meta) 
+                {
                     return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
-            { data: 'namaobat', name: 'namaobat' },
-            { data: 'qty', name: 'qty' },
             { 
-                data: 'jual', name: 'jual',render: $.fn.dataTable.render.number(',', '.', 2, '')     
+                data: 'namaobat', 
+                name: 'namaobat' 
             },
             { 
-                data: 'subtotal', name: 'subtotal',render: $.fn.dataTable.render.number(',', '.', 2, '')     
+                data: 'qty', 
+                name: 'qty' 
             },
-            { data: 'aksi', name: 'aksi', orderable: false }
+            { 
+                data: 'jual', 
+                name: 'jual',
+                render: $.fn.dataTable.render.number(',', '.', 2, '')     
+            },
+            { 
+                data: 'subtotal', 
+                name: 'subtotal',
+                render: $.fn.dataTable.render.number(',', '.', 2, '')     
+            },
+            { 
+                data: 'aksi', 
+                name: 'aksi', 
+                orderable: false 
+            }
         ]
     });
+
+    // Menggunakan event draw.dt DataTable
+        $('#tabelpenjualan').on('draw.dt', function () {
+            // Periksa apakah DataTable memiliki data atau tidak
+            if ($(this).DataTable().data().count() === 0) {
+                $('#btn-bayar').hide(); // Sembunyikan tombol jika tidak ada data
+            } else {
+                $('#btn-bayar').show(); // Tampilkan tombol jika ada data
+            }
+        });
+
+        // Untuk memastikan kondisi awal saat halaman dimuat, cek secara langsung
+        if ($('#tabelpenjualan').DataTable().data().count() === 0) {
+            $('#btn-bayar').hide(); // Sembunyikan tombol jika tidak ada data saat halaman dimuat
+        } else {
+            $('#btn-bayar').show(); // Tampilkan tombol jika ada data saat halaman dimuat
+        }
 
     $(document).on('click', '.hapus', function(){
         let id = $(this).attr('id');
@@ -376,15 +485,111 @@ $(document).ready(function(){
                 console.log(res);
                 toastr.success(res.text, 'Success'); 
                 $('#tabelpenjualan').DataTable().ajax.reload();
+            },
+            error: function(xhr){
+                console.log(xhr);
+                toastr.error(xhr.responseJSON.text, 'gagal!'); 
             }
+
         })
     });
 
+    $('#buka').click(function(){
+        $('#tambah').show();
+        $('#obat_id').prop('disabled', false);
+        $('#qty').attr('disabled', false);
+        $('#decrement-btn').attr('disabled', false);
+        $('#increment-btn').attr('disabled', false);
+        $('#diskon').attr('disabled', false);
+        // $('#qty').val(null);
+        // $('#diskon')val(null);
+    });
 
+    $('#btn-bayar').click(function() {
+        let id = $('#nota').val();
+        $.ajax({
+            url: "{{ route('penjualan.gethitung') }}",
+            type: 'post',
+            data: {
+                id : id,
+                _token : "{{ csrf_token() }}"
+            },
+            success : function (res) {
+                console.log(res);
+                $('#modalnota').val(res.data[0].nota);
+                $('#modaldiskon').val(res.diskon);
+                $('#totalharga').val(res.data[0].totalHarga);
+                $('#harusbayar').val(parseInt(res.data[0].totalHarga) - parseInt(res.diskon));
+            }
+
+        })
+    }); 
     
-            
+   
+    $(document).on('blur', '#jumlahdibayar', function() {
+        let a = $('#harusbayar').val();
+        let b = $(this).val();
+        let c =  b - a;
 
+        if (c < 0) {
+            toastr.info('Periksa Inputan', 'Info'); 
+            $('#simpanbayar').hide();
+        } else {
+            $('#kembali').val(c);
+            $('#simpanbayar').show();
+        }
+    });
 
+    $(document).on('click', '#simpanbayar', function() {
+        $.ajax({
+            url: "{{ route('pembayaran.store') }}",
+            type: 'post',
+            data: {
+                nota : $('#modalnota').val(),
+                totalharga : $('#totalharga').val(),
+                totaldiskon : $('#modaldiskon').val(),
+                harusbayar : $('#harusbayar').val(),
+                jumlahdibayar : $('#jumlahdibayar').val(),
+                kembali : $('#kembali').val(),
+                _token : "{{ csrf_token() }}"
+            },
+            success : function (res) {
+                console.log(res);
+                toastr.success(res.text, 'Success'); 
+                $('#btn-tutup').click();
+                $('#transaksiBaru').show();
+                $('#cetak').show();
+                $('#buka').hide();
+                
+            }
+
+        })
+
+    });
+    $(document).on('click', '#cetak', function() {
+        $.ajax({
+            url: "{{ route('penjualan.cetak') }}",
+            type: 'post',
+            data: {
+               
+               kwitansi : $('#kwitansi').val(),
+                _token : "{{ csrf_token() }}"
+            },
+            success : function (res) {
+                $('#transaksiBaru').show();
+                console.log(res);
+                toastr.success(res.text, 'Success'); 
+                var newTab = window.open(res.url, '_blank');
+                newTab.focus();
+            },
+            error: function(xhr){
+                console.log(xhr);
+                toastr.error(xhr.responseJSON.text, 'gagal!'); 
+            }
+
+        })
+
+    });
 
     
 </script>

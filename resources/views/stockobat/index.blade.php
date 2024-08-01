@@ -33,95 +33,98 @@
                 </table>
             </div>
         </div>
+
+
         <button type="button" id="btn-tambah" class="btn btn-info" data-toggle="modal" data-target="#modal-info">
             Tambah
         </button>
+
         <div class="modal fade" id="modal-info">
             <div class="modal-dialog">
-              <div class="modal-content bg-emerald-100">
-                <div class="modal-header">
-                  <h4 class="modal-title"><h2>Input Stoc</h2></h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
+                <div class="modal-content bg-emerald-100">
+                    <div class="modal-header">
+                    <h4 class="modal-title"><h2>Input Stock</h2></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
 
-                    <form action="{{ route('stock.store') }}" method="post" id="forms">
-                        @csrf
-                    
-
-                    <div class="form-group">
-                        <label for="obat">Nama</label>
-                        <select name="obat_id" id="obat_id" class="form-control rounded">
-                            <option value="">Pilih Obat</option>
-                            @foreach ($obat as $item )
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>     
-                            @endforeach
-                        </select>  
-                    </div>
-
-                    <div class="bg-transparent w-auto rounded  mx-2  my-0">STOCK
-                        <hr class="w-auto h-1 my-1 bg-red-700 border-0 rounded">
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="stocklama" class="mr-sm-2">Stock Awal</label>
-                            <input type="text" onkeypress="return number(event)"  class="form-control rounded" readonly autocomplete="off" name="stocklama" id="stocklama"  value="0" class="form-control">
-                            <input type="text" class="form-control rounded" hidden autocomplete="off" name="id" id="id" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inlineForm" class="mr-sm-2">Masuk</label>
-                            <input type="text" onkeypress="return number(event)"  class="form-control rounded"  autocomplete="off" name="masuk" id="masuk" value="0" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inlineForm" class="mr-sm-2">Keluar</label>
-                            <input type="text" onkeypress="return number(event)"  class="form-control rounded"  autocomplete="off" name="keluar" id="keluar" value="0" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="supplier">Stock Akhir</label>
-                        <input type="text" class="form-control rounded" id="stock" name="stock"  value="0" autocomplete="off">
-                    </div>
-                    <div class="bg-transparent w-auto rounded  mx-2  my-0">STOCK OBAT
-                        <hr class="w-auto h-1 my-1 bg-red-700 border-0 rounded">
-                    </div>
-                    <div class="form-group"> 
-                        <label for="kode">Harga Beli</label>
-                        <input type="text" class="form-control rounded" id="beli" name="beli" onkeypress="return number(event)" placeholder="harga beli"  maxlength="8" autocomplete="off" >
-                    </div>
-                    <div class="form-group"> 
-                        <label for="kode">Harga Jual</label>
-                        <input type="text" class="form-control rounded" id="jual" name="jual" onkeypress="return number(event)" placeholder="harga jual"  maxlength="8" autocomplete="off" >
-                    </div>
-                    <div class="form-group">
-                        <label for="dosis">Tanggal Expired</label>
-                        <input type="date" class="form-control rounded" id="expired" name="expired"  autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="indikasi">Keterangan</label>
-                        <input type="text" class="form-control rounded"  id="keterangan" name="keterangan"  placeholder="Keterangan" autocomplete="off">
-                    </div>
-                    
-                    <div class="modal-footer  d-flex justify-content-end ">
-                        <div class="d-flex justify-items-center  ">
-                                <button type="button" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md" data-dismiss="modal" id="btn-tutup">Close</button>
-                                
-                                <button type="submit" id="simpan" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md">Save </button>
+                        <form action="{{ route('stock.store') }}" method="post" id="forms">
+                                @csrf
                             
-                        </div>
+
+                            <div class="form-group">
+                                <label for="obat">Nama</label>
+                                <select name="obat_id" id="obat_id" class="form-control rounded">
+                                    <option value="">Pilih Obat</option>
+                                    @foreach ($obat as $item )
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>     
+                                    @endforeach
+                                </select>  
+                            </div>
+
+                            <div class="bg-transparent w-auto rounded  mx-2  my-0">STOCK
+                                <hr class="w-auto h-1 my-1 bg-red-700 border-0 rounded">
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="stocklama" class="mr-sm-2">Stock Awal</label>
+                                    <input type="text" onkeypress="return number(event)"  class="form-control rounded" readonly autocomplete="off" name="stocklama" id="stocklama"  value="0" class="form-control">
+                                    <input type="text" class="form-control rounded" hidden autocomplete="off" name="id" id="id" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inlineForm" class="mr-sm-2">Masuk</label>
+                                    <input type="text" onkeypress="return number(event)"  class="form-control rounded"  autocomplete="off" name="masuk" id="masuk" value="0" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inlineForm" class="mr-sm-2">Keluar</label>
+                                    <input type="text" onkeypress="return number(event)"  class="form-control rounded"  autocomplete="off" name="keluar" id="keluar" value="0" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="supplier">Stock Akhir</label>
+                                <input type="text" class="form-control rounded" id="stock" name="stock"  value="0" autocomplete="off">
+                            </div>
+                            <div class="bg-transparent w-auto rounded  mx-2  my-0">STOCK OBAT
+                                <hr class="w-auto h-1 my-1 bg-red-700 border-0 rounded">
+                            </div>
+                            <div class="form-group"> 
+                                <label for="kode">Harga Beli</label>
+                                <input type="text" class="form-control rounded" id="beli" name="beli" onkeypress="return number(event)" placeholder="harga beli"  maxlength="8" autocomplete="off" >
+                            </div>
+                            <div class="form-group"> 
+                                <label for="kode">Harga Jual</label>
+                                <input type="text" class="form-control rounded" id="jual" name="jual" onkeypress="return number(event)" placeholder="harga jual"  maxlength="8" autocomplete="off" >
+                            </div>
+                            <div class="form-group">
+                                <label for="dosis">Tanggal Expired</label>
+                                <input type="date" class="form-control rounded" id="expired" name="expired"  autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="indikasi">Keterangan</label>
+                                <input type="text" class="form-control rounded"  id="keterangan" name="keterangan"  placeholder="Keterangan" autocomplete="off">
+                            </div>
+                            
+                            <div class="modal-footer  d-flex justify-content-end ">
+                                <div class="d-flex justify-items-center  ">
+                                        <button type="button" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md" data-dismiss="modal" id="btn-tutup">Close</button>
+                                        
+                                        <button type="submit" id="simpan" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md">Save </button>
+                                    
+                                </div>
+                            </div>
+                        </form>
+                    
                     </div>
-                </form>
-                  
-                </div>
                 <!-- /.card-body -->
 
                
                 </div>
                
-              </div>
-    </div>
+            </div>
+        </div>
 </x-app-layout>
 @push('js')
 <script src="{{ asset('datatables/js/jquery.js') }}"></script>

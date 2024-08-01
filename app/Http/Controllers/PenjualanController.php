@@ -10,11 +10,16 @@ use App\Models\Penjualan;
 use App\Models\Stockobat;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Support\Facades\DB;
 use GrahamCambell\ResulType\Result;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\Response; // Import Response dari Laravel
 
 
 class PenjualanController extends Controller
@@ -31,12 +36,11 @@ class PenjualanController extends Controller
         } else {
             $ambil = Penjualan::all()->last();
             $notati    = $ambil->nota;
-            $urut = (int)substr($notati, -8) + 1;
+            $urut = (int)substr($notati, - 8) + 1;
 
             $nomor = 'NF' . $thnBln . $urut;
         }
 
-        $thnBln = $now->year . $now->format('m'); // Format: YYYYMM
         // dd($thnBln);
         return view('penjualan.index', compact('tanggals', 'nomor', 'obat'));
     }
@@ -201,4 +205,68 @@ class PenjualanController extends Controller
             return response()->json(['text' => 'Gagal menghapus data'], 400);
         }
     }
+
+
+    public function getHitung(Request $request) 
+    {
+        $id = $request->id;
+        $data = Penjualan::hitung($id)->get();
+        $datas = Penjualan::where('nota', $id)->get();
+        $discount = [];
+        foreach ($datas as $key) {
+            array_push($discount, ($key->diskon / 100 * $key->subtotal));
+        }
+
+        $diskon = array_sum($discount);
+
+        return response()->json(['data' =>$data, 'diskon' =>$diskon],);
+
+    }
+
+    public function CetakNota(Request $request)
+    {
+        $nota = $request->kwitansi;    
+        $data = Penjualan::JoinCetak()->where('penjualans.nota', $nota)->get();
+        $dompdf = new Dompdf();
+        $html = view('penjualan.nota', compact('data','nota'))->render();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $output = $dompdf->output();
+        $nama_file = ''.$nota . '.pdf'; // Misalnya 'nota_12345.pdf'
+         file_put_contents(public_path('pdf/' . $nama_file), $output);
+        
+
+        return response()->json([
+            'message' => 'PDF file generated successfully.',
+            'url' => '/pdf/'. $nama_file
+        ]);
+
+
+        // // ditampilkan kelayar 
+        // $nota = $request->kwitansi;    
+        // $data = Penjualan::where('nota', $nota)->get();
+        
+        // // Buat objek Dompdf
+        // $dompdf = new Dompdf();
+        // $options = new Options();
+        // $options->set('isHtml5ParserEnabled', true);
+        // $options->set('isPhpEnabled', true);
+        // $dompdf->setOptions($options);
+        
+        // // Render PDF
+        // $html = view('penjualan.nota', compact('data','nota'))->render();
+        // $dompdf->loadHtml($html);
+        // $dompdf->setPaper('A4', 'portrait');
+        // $dompdf->render();
+        
+        // // Mengambil output PDF
+        // $output = $dompdf->output();
+        
+        // // Tampilkan PDF di browser
+        // return Response::make($output, 200, [
+        //     'Content-Type' => 'application/pdf',
+        //     'Content-Disposition' => 'inline; filename="' . $nota . '.pdf"',
+        // ]);
+    }   
 }

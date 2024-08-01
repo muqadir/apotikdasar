@@ -15,7 +15,7 @@ class CreatePenjualansTable extends Migration
     {
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
-            $table->string('nota', 12);
+            $table->string('nota', 15);
             $table->string('status')->default('N');
             $table->date('tanggal');
             $table->integer('qty');
