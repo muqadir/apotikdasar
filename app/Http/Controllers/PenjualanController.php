@@ -138,6 +138,7 @@ class PenjualanController extends Controller
                 'nota' => $request->nota,
                 'tanggal' => $request->tanggal,
                 'qty' => $request->qty,
+                'pajak' => $request->pajak,
                 'diskon' => $request->diskon,
                 'item' => $request->obat_id,
                 'subtotal' => $request->total,
@@ -218,8 +219,14 @@ class PenjualanController extends Controller
         }
 
         $diskon = array_sum($discount);
+        $pajaks = [];
+        foreach ($datas as $key) {
+            array_push($pajaks, ($key->pajak / 100 * $key->subtotal));
+        }
 
-        return response()->json(['data' =>$data, 'diskon' =>$diskon],);
+        $pajak = array_sum($pajaks);
+
+        return response()->json(['data' => $data, 'diskon' => $diskon, 'pajak' =>  $pajak ]);
 
     }
 

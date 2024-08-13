@@ -59,6 +59,9 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     // Route::resource('penjualan', PenjualanController::class);
     
     Route::get('belanja/', [PembelianController::class, 'index'])->name('belanja.index');
+    Route::post('belanja/store', [PembelianController::class, 'store'])->name('belanja.store');
+    Route::get('belanja/datapembelian', [PembelianController::class, 'DataPembelian'])->name('belanja.datapembelian');
+    Route::post('belanja/hapus', [PembelianController::class, 'destroy'])->name('belanja.hapus');
 
 
     Route::get('penjualan/', [PenjualanController::class, 'index'])->name('penjualan.index');
@@ -67,13 +70,13 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::get('penjualan/datapenjualan', [PenjualanController::class, 'DataPenjualan'])->name('penjualan.datapenjualan');
     Route::post('penjualan/cetak', [PenjualanController::class, 'CetakNota'])->name('penjualan.cetak');
 
-    Route::post('getobat', [StockobatController::class, 'getObat'])->name('stock.getobat');
-    Route::post('getdataobat', [StockobatController::class, 'getDataObat'])->name('stock.getdataobat');
-    Route::post('gethitung', [PenjualanController::class, 'getHitung'])->name('penjualan.gethitung');
+    // Route::post('getobat', [StockobatController::class, 'getObat'])->name('stock.getobat');
+    // Route::post('getdataobat', [StockobatController::class, 'getDataObat'])->name('stock.getdataobat');
+    // Route::post('gethitung', [PenjualanController::class, 'getHitung'])->name('penjualan.gethitung');
 
     
     Route::get('pembayaran/', [PembayaranController::class, 'index'])->name('pembayaran.index');
-    Route::post('pembayaran.store', [PembayaranController::class, 'store'])->name('pembayaran.store');
+    Route::post('pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
     Route::post('pembayaran/cetak', [PembayaranController::class, 'CetakNota'])->name('pembayaran.cetak');
     // Manajemen User
     Route::get('management/', [AdminPanelController::class, 'index'])->name('management.index');

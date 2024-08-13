@@ -14,14 +14,14 @@ class CreatePembayaransTable extends Migration
     public function up()
     {
         Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id();
             $table->string('nota', 15)->primary(); 
             $table->decimal('totalharga', 10, 2);  
-            $table->integer('totaldiskon');
+            $table->decimal('totaldiskon', 10, 2);  
+            $table->decimal('totalpajak', 10, 2);  
             $table->decimal('harusbayar', 10, 2);
             $table->decimal('jumlahdibayar', 10, 2);
             $table->decimal('kembali', 10, 2);
-            // $table->foreign('nota')->references('nota')->on('penjualans')->onDelete('cascade');
+            $table->enum('status', ['Cash', 'Hutang']);
             $table->timestamps();
         });
     }

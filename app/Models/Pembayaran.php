@@ -9,7 +9,7 @@ class Pembayaran extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nota', 'totalharga', 'totaldiskon', 'harusbayar', 'jumlahdibayar', 'kembali'
+        'nota', 'totalharga', 'totaldiskon', 'totalpajak', 'harusbayar', 'jumlahdibayar', 'kembali', 'status'
     ];
 
     public function penjualan()

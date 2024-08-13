@@ -15,7 +15,22 @@ class CreatePembeliansTable extends Migration
     {
         Schema::create('pembelians', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('faktur', 15);
+            $table->date('tanggal');
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('user_id');
+            // $table->string('kode', 8);
+            $table->string('item', 20);
+            $table->decimal('harga', 9, 2);
+            $table->integer('qty');
+            $table->decimal('totalkotor', 9, 2); // Ganti dari 'subtotal'
+            $table->decimal('pajak', 9, 2);
+            $table->decimal('diskon', 9, 2);
+            $table->decimal('totalbersih', 9, 2); // Tambahkan kolom baru
+            $table->string('keterangan', 150);
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');   
+            $table->timestamps();     
         });
     }
 

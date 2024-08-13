@@ -122,6 +122,10 @@
                                         
                                     </div>
                                     <div class="form-group col-md-3">
+                                        <label for="pajak" class="mr-sm-2">Pajak</label>
+                                        <input type="text" onkeypress="return number(event)"  class="form-control rounded"  autocomplete="off" name="pajak" id="pajak" value="0" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-3">
                                         <label for="inlineForm" class="mr-sm-2">Diskon</label>
                                         <input type="text" onkeypress="return number(event)"  class="form-control rounded"  autocomplete="off" name="diskon" id="diskon" value="0" class="form-control">
                                     </div>
@@ -207,19 +211,31 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="metode">Metode Bayar</label>
+                                                                <select name="metode" id="metode" class="form-control rounded">
+                                                                    <option value="">Pilih Metode</option>
+                                                                    <option value="Cash">Cash</option>
+                                                                    <option value="Hutang">Hutang</option> 
+                                                                </select>  
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="totalharga">Total Harga</label>
                                                                 <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="totalharga" id="totalharga" class="form-control" value="0">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="supplier">Diskon</label>
+                                                                <label for="modaldiskon">Diskon</label>
                                                                 <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="modaldiskon" id="modaldiskon" class="form-control" value="0">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="supplier">Jumlah Yang harus di bayar</label>
+                                                                <label for="modalpajak">Pajak</label>
+                                                                <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="modalpajak" id="modalpajak" class="form-control" value="0">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="harusbayar">Jumlah Yang harus di bayar</label>
                                                                 <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" readonly autocomplete="off" name="harusbayar" id="harusbayar" class="form-control" value="0">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="supplier">Jumlah Bayar</label>
+                                                                <label for="jumlahdibayar">Jumlah Bayar</label>
                                                                 <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right" autocomplete="off" name="jumlahdibayar" id="jumlahdibayar" class="form-control" value="0">
                                                             </div>
                                                             <div class="form-group">
@@ -349,7 +365,7 @@ $(document).ready(function(){
     $('#obat_id').change(function () {
         let id = $(this).val();
         $.ajax({
-            url : "{{ route('stock.getdataobat') }}",
+            url : "{{ route('getdataobat') }}", //yang diubah
             type : 'post',
             data : {
                 id : id,
@@ -393,7 +409,7 @@ $(document).ready(function(){
                 toastr.success(res.text, 'Success'); // Menampilkan notifikasi toastr sukses
                 $('#tabelpenjualan').DataTable().ajax.reload();
                 // $('#btn-bayar').show();
-                $('#buka').hide();
+                $('#buka').show();
             },
             error: function(xhr){
                 console.log(xhr);
@@ -508,7 +524,7 @@ $(document).ready(function(){
     $('#btn-bayar').click(function() {
         let id = $('#nota').val();
         $.ajax({
-            url: "{{ route('penjualan.gethitung') }}",
+            url: "{{ route('gethitung') }}",
             type: 'post',
             data: {
                 id : id,
@@ -518,8 +534,9 @@ $(document).ready(function(){
                 console.log(res);
                 $('#modalnota').val(res.data[0].nota);
                 $('#modaldiskon').val(res.diskon);
+                $('#modalpajak').val(res.pajak);
                 $('#totalharga').val(res.data[0].totalHarga);
-                $('#harusbayar').val(parseInt(res.data[0].totalHarga) - parseInt(res.diskon));
+                $('#harusbayar').val(parseInt(res.data[0].totalHarga) + parseInt(res.pajak) - parseInt(res.diskon));
             }
 
         })
@@ -547,10 +564,12 @@ $(document).ready(function(){
             data: {
                 nota : $('#modalnota').val(),
                 totalharga : $('#totalharga').val(),
+                totalpajak : $('#totalharga').val(),
                 totaldiskon : $('#modaldiskon').val(),
                 harusbayar : $('#harusbayar').val(),
                 jumlahdibayar : $('#jumlahdibayar').val(),
                 kembali : $('#kembali').val(),
+                status :  $('#metode').val(),
                 _token : "{{ csrf_token() }}"
             },
             success : function (res) {

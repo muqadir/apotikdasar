@@ -39,18 +39,11 @@ class PembayaranController extends Controller
         //  $data = $request->all();
 
         //  dd($data);
-
-        //  'nota', 
-        //  'totalharga', 
-        //  'totaldiskon', 
-        //  'harusbayar', 
-        //  'jumlahdibayar', 
-        //  'kembali'
-
         $rules = [
             'nota' => 'required|string|max:15',
             'totalharga' => 'required|numeric',
-            'totaldiskon' => 'required|integer',
+            'totaldiskon' => 'required|numeric',
+            'totalpajak' => 'required|numeric',
             'harusbayar' => 'required|numeric',
             'jumlahdibayar' => 'required|numeric',
             'kembali' => 'required|numeric',
@@ -60,11 +53,10 @@ class PembayaranController extends Controller
             'nota.required' => 'Kolom Nota tidak boleh kosong.',
             'nota.string' => 'Kolom Nota harus berupa teks.',
             'nota.max' => 'Panjang Nota sampai 15 karakter.',
-            // 'modalnota.unique' => 'Nota sudah digunakan, harap gunakan nota lain.',
             'totalharga.required' => 'Kolom Total Harga tidak boleh kosong.',
             'totalharga.numeric' => 'Kolom Total Harga harus berupa angka.',
             'totaldiskon.required' => 'Kolom Total Diskon tidak boleh kosong.',
-            'totaldiskon.integer' => 'Kolom Total Diskon harus berupa bilangan bulat.',
+            'totaldiskon.numeric' => 'Kolom Total Diskon harus berupa angka.',
             'harusbayar.required' => 'Kolom Harus Bayar tidak boleh kosong.',
             'harusbayar.numeric' => 'Kolom Harus Bayar harus berupa angka.',
             'jumlahdibayar.required' => 'Kolom Jumlah Dibayar tidak boleh kosong.',
@@ -82,21 +74,18 @@ class PembayaranController extends Controller
         $data->nota = $request->nota;
         $data->totalharga = $request->totalharga;
         $data->totaldiskon = $request->totaldiskon;
+        $data->totalpajak = $request->totalpajak;
         $data->harusbayar = $request->harusbayar;
         $data->jumlahdibayar = $request->jumlahdibayar;
         $data->kembali = $request->kembali;
-
+        $data->status = $request->status;
         $save = $data->save();
 
         if ($save) {
-            // Jika penyimpanan berhasil, lakukan tindakan tambahan (jika ada)
             return response()->json(['text' => 'Data Pembayaran berhasil disimpan'], 200);
         } else {
-            // Jika penyimpanan gagal
             return response()->json(['text' => 'Data Pembayaran gagal disimpan'], 422);
         }
-
-
     }
 
     public function CetakNota(Request $request)

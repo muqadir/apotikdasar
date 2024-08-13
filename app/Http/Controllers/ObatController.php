@@ -98,4 +98,11 @@ class ObatController extends Controller
             return response()->json(['text' => 'Data Obat gagal dihapus'], 500);
         }
     }
+
+    public function cariKode(Request $request)
+    {
+        $kode = $request->kode;
+        $data = Obat::where('id', $kode)->get();
+        return response()->json($data, 200);
+    }
 }
