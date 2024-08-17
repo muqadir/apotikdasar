@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembelianController;
@@ -78,6 +79,11 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::get('pembayaran/', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::post('pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
     Route::post('pembayaran/cetak', [PembayaranController::class, 'CetakNota'])->name('pembayaran.cetak');
+    
+    Route::get('laporan/', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('laporan/penjualan', [LaporanController::class, 'dataTablePenjualan'])->name('laporan.penjualan');
+    Route::get('laporan/belanja', [LaporanController::class, 'dataTablePembelian'])->name('laporan.belanja');
+
     // Manajemen User
     Route::get('management/', [AdminPanelController::class, 'index'])->name('management.index');
     Route::post('management/store', [AdminPanelController::class, 'store'])->name('management.store');

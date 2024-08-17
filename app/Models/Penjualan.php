@@ -29,7 +29,13 @@ class Penjualan extends Model
             ->join('pasiens', 'pasiens.id', '=', 'penjualans.pasien_id')
             ->join('stockobats', 'stockobats.obat_id', '=', 'obats.id')
             ->join('users', 'users.id', '=', 'penjualans.user_id')
-            ->select('penjualans.*', 'obats.name as namaobat', 'users.name', 'stockobats.jual', 'pasiens.name as costumer');
+            ->select(
+                'penjualans.*', 
+                'obats.name as namaobat', 
+                'users.name',
+                'stockobats.jual', 
+                'pasiens.name as costumer'
+            );
     }
 
     public static function hitung($id)

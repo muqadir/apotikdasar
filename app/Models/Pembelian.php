@@ -62,7 +62,7 @@ class Pembelian extends Model
        ->where('faktur', $faktur)
        ->selectRaw('sum(totalkotor) as totalKotor')
        ->selectRaw('sum(pajak) as totalPajak')
-       ->selectRaw('sum(pajak) as totalPajak')
+    //    ->selectRaw('sum(pajak) as totalPajak')
        ->selectRaw('sum(diskon) as totalDiskon')
        ->selectRaw('sum(totalbersih) as totalBersih');
     }

@@ -47,60 +47,57 @@
                     <form action="{{ route('obat.store') }}" method="post" id="forms">
                         @csrf
                    
-                    <div class="form-group">
-                        <label for="supplier">Nama Obat</label>
-                        <input type="hidden" class="form-control" id="id" name="id"  autocomplete="off">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama Obat" autocomplete="off">
-                    </div>
-                    <div class="form-group"> 
-                        <label for="kode">Kode</label>
-                        <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Obat"  maxlength="8" autocomplete="off" >
-                    </div>
-                    <div class="form-group">
-                        <label for="dosis">Dosis</label>
-                        <input type="text" class="form-control" id="dosis" name="dosis" placeholder="Enter dosis" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="indikasi">Indikasi</label>
-                        <input type="text" class="form-control"  id="indikasi" name="indikasi"  placeholder="Indikasi Obat" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="kategori">Kategori</label>
-                        <select name="kategori_id" id="kategori_id" class="form-control">
-                            <option value="">Pilih Kategori</option>
-                            @foreach ($kategori as $item )
-                            <option value="{{ $item->id }}">{{ $item->kategori }}</option>
-                                
-                            @endforeach
-
-                        </select>  
-                    </div>
-                    <div class="form-group">
-                        <label for="satuan">Satuan</label>
-                        <select name="satuan_id" id="satuan_id" class="form-control">
-                            <option value="">Pilih Satuan</option>
-                            @foreach ( $satuan as $item  )
-                                <option value="{{ $item->id }}">{{ $item->satuan }}</option>    
-                            @endforeach
-                        </select>  
-                    </div>
-                    <div class="modal-footer  d-flex justify-content-end ">
-                        <div class="d-flex justify-items-center  ">
-                                <button type="button" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md" data-dismiss="modal" id="btn-tutup">Close</button>
-                                
-                                <button type="submit" id="simpan" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md">Save </button>
-                            
+                        <div class="form-group">
+                            <label for="supplier">Nama Obat</label>
+                            <input type="hidden" class="form-control" id="id" name="id"  autocomplete="off">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nama Obat" autocomplete="off">
                         </div>
-                    </div>
-                </form>
-                  
-                </div>
-                <!-- /.card-body -->
+                        <div class="form-group"> 
+                            <label for="kode">Kode</label>
+                            <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Obat"  maxlength="8" autocomplete="off" >
+                        </div>
+                        <div class="form-group">
+                            <label for="dosis">Dosis</label>
+                            <input type="text" class="form-control" id="dosis" name="dosis" placeholder="Enter dosis" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="indikasi">Indikasi</label>
+                            <input type="text" class="form-control"  id="indikasi" name="indikasi"  placeholder="Indikasi Obat" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="kategori">Kategori</label>
+                            <select name="kategori_id" id="kategori_id" class="form-control">
+                                <option value="">Pilih Kategori</option>
+                                @foreach ($kategori as $item )
+                                <option value="{{ $item->id }}">{{ $item->kategori }}</option>
+                                    
+                                @endforeach
 
-               
+                            </select>  
+                        </div>
+                        <div class="form-group">
+                            <label for="satuan">Satuan</label>
+                            <select name="satuan_id" id="satuan_id" class="form-control">
+                                <option value="">Pilih Satuan</option>
+                                @foreach ( $satuan as $item  )
+                                    <option value="{{ $item->id }}">{{ $item->satuan }}</option>    
+                                @endforeach
+                            </select>  
+                        </div>
+                        <div class="modal-footer  d-flex justify-content-end ">
+                            <div class="d-flex justify-items-center  ">
+                                    <button type="button" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md" data-dismiss="modal" id="btn-tutup">Close</button>
+                                    
+                                    <button type="submit" id="simpan" class="btn btn-block btn-outline-success btn-lg mx-1 my-1 rounded-md">Save </button>
+                                
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                <!-- /.card-body --> 
+            </div>
                
-              </div>
+        </div>
     </div>
 </x-app-layout>
 @push('js')

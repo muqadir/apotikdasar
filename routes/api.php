@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\StockobatController;
@@ -29,3 +30,5 @@ Route::post('cariKode', [ObatController::class,  'cariKode'])->name('cariKode');
 
 Route::get('datapembelian', [PembelianController::class, 'DataPembelian'])->name('datapembelian');
 Route::post('prosesspembayaran', [PembelianController::class, 'ProsessPembayaran'])->name('prosessbayar');
+Route::post('detailsjual', [LaporanController::class, 'DetailPenjualan'])->name('detailsjual');
+Route::post('detailsbeli', [LaporanController::class, 'DetailPembelian'])->name('detailsbeli');

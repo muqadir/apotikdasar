@@ -341,46 +341,15 @@ function number(evt) {
         
     })
 
-    // function buatCinta() {
-    //     let n = 30;
-    //     let str = "";
-
-    //     for (let i = n/2; i<n; i += 2) {
-    //         for (let j=1; j<n-i; j+=2) {
-    //             str += " ";
-    //         }
-    //         for (let j=1; j<i +1; j++) {
-    //             str += "*";
-    //         }
-    //         for (let j=1; j<n-i +1; j++) {
-    //             str += " ";
-    //         }
-    //         for (let j=1; j<i +1 ; j++) {
-    //             str += "*";
-    //         }
-    //         str += "\n";
-    //     }
-    //     for (let i = n; i>0; i--){
-    //         for (let j=0; j<n -i; j++){
-    //             str += " ";
-    //         }
-    //         for (let j=1; j<i*2; j++){
-    //             str += "*";
-    //         }
-    //         str += "\n";
-    //     }
-    //     console.log(str);
-    // }
-
     $(document).on('blur', '#harga', function() {
-        let harga = parseFloat($(this).val()); // Menggunakan || 0 untuk menangani nilai NaN
-        let qty = parseInt($('#qty').val());      // Menggunakan || 0 untuk menangani nilai NaN
+        let harga = parseFloat($(this).val()); 
+        let qty = parseInt($('#qty').val());      
         $('#subtotal').val(qty * harga);
     
     });
     $(document).on('blur', '#qty', function() {
-        let harga = parseInt($('#harga').val()); // Menggunakan || 0 untuk menangani nilai NaN
-        let qty = parseInt($(this).val());      // Menggunakan || 0 untuk menangani nilai NaN
+        let harga = parseInt($('#harga').val()); 
+        let qty = parseInt($(this).val());      
         $('#subtotal').val(qty * harga);
     
     });
@@ -412,7 +381,7 @@ function number(evt) {
             },
             error: function(xhr){
                 console.log(xhr);
-                toastr.error(xhr.responseJSON.text, 'gagal!'); // Menampilkan notifikasi toastr error
+                toastr.error(xhr.responseJSON.text, 'gagal!'); 
             }
         });
         $('#prosess').attr('disabled', false);
@@ -479,7 +448,7 @@ $(document).on('click', '.hapus', function() {
                 },
                 success: function(res) {
                     // Update DataTable after deletion
-                    $('#tabelpembelian').DataTable().ajax.reload();  // Reload the table data
+                    $('#tabelpembelian').DataTable().ajax.reload();  
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
