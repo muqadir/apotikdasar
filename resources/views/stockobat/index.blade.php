@@ -294,7 +294,7 @@ $(document).on('change', '#obat', function() {
 
     // AJAX request using jQuery
     $.ajax({
-        url: "{{ route('stock.getobat') }}",  // URL to send the request
+        url: "{{ route('getobat') }}",  // URL to send the request
         type: 'post',  // HTTP method (POST)
         data: {
             id: id,  // Data to send in the request (selected id)

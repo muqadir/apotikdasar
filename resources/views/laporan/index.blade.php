@@ -12,14 +12,47 @@
 
     <div class="row">
         <div class="col-12 col-sm-12">
+            
+
+            <div class="d-flex justify-content-center">
+                <div class="form-inline">
+                    <div class="form-group mb-2 mr-3">
+                       
+                        <div class="input-group date" id="tanggal" data-target-input="nearest">
+                            <div class="input-group-prepend">
+                                <label for="min" class="col-sm-2 col-form-label">Min</label>
+                              </div>
+                            <input type="text" class="form-control datetimepicker-input"  id="min" name="min" data-target="#min" >
+                            <div class="input-group-append" data-target="#min" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="form-group mb-2">
+                      
+                       <div class="input-group date" id="tanggal" data-target-input="nearest">
+                        <div class="input-group-prepend">
+                            <label for="max" class="col-sm-2 col-form-label">Max</label>
+                          </div>
+                        <input type="text" class="form-control datetimepicker-input"  id="max" name="max" data-target="#max" >
+                        <div class="input-group-append" data-target="#max" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div> 
+                    </div>
+                    <button id="btn-seleksi" class="btn btn-success">Filter</button>
+                    <button id="btn-refresh" class="btn btn-success">Refresh</button>
+                </div>
+            </div>
             <div class="card card-primary card-tabs">
                 <div class="card-header p-0 pt-1">
                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#penjualan" role="tab" aria-controls="penjualan" aria-selected="true">Penjualan</a>
+                            <a class="nav-link active" id="tabs-jual" data-toggle="pill" href="#penjualan" role="tab" aria-controls="penjualan" aria-selected="true">Penjualan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#belanja" role="tab" aria-controls="belanja" aria-selected="false">Belanja</a>
+                            <a class="nav-link" id="tabs-beli" data-toggle="pill" href="#belanja" role="tab" aria-controls="belanja" aria-selected="false">Belanja</a>
                         </li>
                     </ul>
                 </div>
@@ -50,9 +83,8 @@
                                         <th>No</th>
                                         <th>Faktur</th>
                                         <th>Tanggal</th>
-                                        <th>Supplier</th>
-                                        <th>Item</th>
-                                        <th>Total Harga</th>
+                                        <th>Diskon</th>
+                                        <th>Total</th>
                                         <th>Kasir</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -108,6 +140,29 @@
                 Tambah
             </button>
 
+            <div class="d-flex justify-content-space-around">
+                <div class="row form-inline">
+                    <div class="from-group col-6">
+                        <form action="{{ route('laporan.exportpembayaran') }}" method="get">
+                            <input type="text" id="minp" name="minp" hidden >
+                            <input type="text" id="maxp" name="maxp" hidden >
+                            <input type="text" id="pilih" name="pilih"  value="jual" hidden>
+                            <button class="btn btn-warning" id="lapjual">Penjualan</button>
+                        </form>
+                            
+                    </div>
+                    <div class="col-6 from-group">
+                        <form action="{{ route('laporan.exportpembayaran') }}" method="get">
+                            <input type="text" id="minb" name="minb" class="md-2" hidden>
+                            <input type="text" id="maxb" name="maxb" class="md-2" hidden>
+                            <input type="text" id="pilih" name="pilih"  value="beli" hidden>
+                            <button class="btn btn-warning" id="labbeli">Pembelian</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {{-- <a href="{{ route('laporan.exportpembayaran') }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Export ke Exel</a> --}}
+
             <div class="modal fade" id="modal-beli" tabindex="-1" role="dialog" aria-labelledby="modal-beli-title" aria-hidden="true">
                 <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
@@ -156,13 +211,25 @@
 <script src="{{ asset('adminlte/plugins/toastr/toastr.min.js') }}"></script>
 <script>
     $(document).ready(function(){
+        $('#lapjual').attr('disabled', true);
+        $('#labbeli').attr('disabled', true);
+        $('#lapjual').hide();
+        $('#labbeli').hide();
         loadPenjualan();
         loadBelanja();
+        $('#min').datetimepicker({
+        format: 'YYYY-MM-DD',
+       
+        });
+        $('#max').datetimepicker({
+        format: 'YYYY-MM-DD',
+       
+        });
     });
 </script>
 <script>
      
-    function loadPenjualan() {
+    function loadPenjualan(min, max) {
         var table = $("#tabelpenjualan").DataTable({
             rowReorder: true,
             columnDefs: [{
@@ -181,7 +248,11 @@
         processing: true,
         serverSide: false,
         ajax: {
-            url: "{{ route('laporan.penjualan') }}"
+            url: "{{ route('laporan.penjualan') }}",
+            data : {
+                min: min,
+                max : max
+            }
         },
         columns: [
                 {data: null,
@@ -200,13 +271,13 @@
                 },
                 
                 { 
-                    data: 'diskons', 
-                    name: 'diskons',
+                    data: 'totaldiskon', 
+                    name: 'totaldiskon',
                     render: $.fn.dataTable.render.number(',', '.', 2, '')     
                 },
                 { 
-                    data: 'totals', 
-                    name: 'totals',
+                    data: 'totalharga', 
+                    name: 'totalharga',
                     render: $.fn.dataTable.render.number(',', '.', 2, '')     
                 },
                 { 
@@ -221,7 +292,7 @@
             ]
         })
     }
-    function loadBelanja() {
+    function loadBelanja(min, max) {
         $("#tabelpembelian").DataTable({
             rowReorder: true,
             columnDefs: [{
@@ -240,7 +311,11 @@
         processing: true,
         serverSide: false,
         ajax: {
-            url: "{{ route('laporan.belanja') }}"
+            url: "{{ route('laporan.belanja') }}",
+            data : {
+                min: min,
+                max : max
+            }
         },
         columns: [
                 {data: null,
@@ -250,29 +325,27 @@
                         }
                 },
                 { 
-                data: 'faktur', 
-                name: 'faktur' 
+                data: 'nota', 
+                name: 'nota' 
                 },
                 { 
                 data: 'tanggal', 
                 name: 'tanggal' 
                 },
+                
                 { 
-                data: 'supplier', 
-                name: 'supplier' 
-                },
-                { 
-                    data: 'item', 
-                    name: 'item' 
-                },
-                { 
-                    data: 'totals', 
-                    name: 'totals',
+                    data: 'totaldiskon', 
+                    name: 'totaldiskon',
                     render: $.fn.dataTable.render.number(',', '.', 2, '')     
                 },
                 { 
-                    data: 'kasir', 
-                    name: 'kasir' 
+                    data: 'totalharga', 
+                    name: 'totalharga',
+                    render: $.fn.dataTable.render.number(',', '.', 2, '')     
+                },
+                { 
+                    data: 'name', 
+                    name: 'name' 
                 },
                 
                 { 
@@ -414,6 +487,67 @@
         $('#btn-belidetail').click();
         $('#modal-penjualan').modal('hide')
     });
-   
+
+    $(document).on('click', '#btn-seleksi', function() {
+        let min = $('#min').val();
+        let max = $('#max').val();
+        $('#tabelpenjualan').DataTable().destroy();
+        loadPenjualan(min, max);
+        $('#tabelpembelian').DataTable().destroy();
+        loadBelanja(min, max);
+        $('#minp').val(min);
+        $('#maxp').val(max);
+        $('#minb').val(min);
+        $('#maxb').val(max);
+
+        if ($('#minp').val().trim() !== ''  &&  $('#maxp').val().trim() !== '') {
+            $('#lapjual').attr('disabled', false);
+        } else {
+            console.log('Nilai belum terisi.');
+        }
+
+        if ($('#minb').val().trim() !== ''  &&  $('#maxb').val().trim() !== '') {
+            $('#labbeli').attr('disabled', false);
+        } else {
+            console.log('Nilai belum terisi.');
+        }
+    });
+
+
+    $(document).on('click', '#btn-refresh', function() {
+        $('#min').val('');
+        $('#max').val('');
+        $('#minp').val('');
+        $('#maxp').val('');
+        $('#minb').val('');
+        $('#maxb').val('');
+        $('#tabelpenjualan').DataTable().destroy();
+        loadPenjualan();
+        $('#tabelpembelian').DataTable().destroy();
+        loadBelanja();
+        if ($('#minp').val().trim() == ''  &&  $('#maxp').val().trim() == '') {
+            $('#lapjual').attr('disabled', true);
+        } else {
+            console.log('Nilai belum terisi.');
+        }
+
+        if ($('#minb').val().trim() == ''  &&  $('#maxb').val().trim() == '') {
+            $('#labbeli').attr('disabled', true);
+        } else {
+            console.log('Nilai belum terisi.');
+        }
+
+    });
+
+    $(document).on('click', '#tabs-jual', function() {
+        $('#lapjual').show();
+        $('#labbeli').hide();
+       
+    });
+    $(document).on('click', '#tabs-beli', function() {
+        $('#lapjual').hide();
+        $('#labbeli').show();
+    });
+
 
 </script>

@@ -71,15 +71,15 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="harga" class="mr-sm-2">Harga @ Satuan</label>
-                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right number-format" autocomplete="off" name="harga" id="harga"  value="0" class="form-control rounded">
+                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right " autocomplete="off" name="harga" id="harga"  value="0" class="form-control rounded">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="qty" class="mr-sm-2">Jumlah Pembelian</label>
-                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right number-format" autocomplete="off" name="qty" id="qty"  value="0" class="form-control rounded">
+                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right " autocomplete="off" name="qty" id="qty"  value="0" class="form-control rounded">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="subtotal" class="mr-sm-2">Sub Total</label>
-                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right number-format" readonly autocomplete="off" name="subtotal" id="subtotal"  value="0" class="form-control rounded">
+                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right " readonly autocomplete="off" name="subtotal" id="subtotal"  value="0" class="form-control rounded">
                                         </div>
                                         
                                     
@@ -89,7 +89,7 @@
 
                                         <div class="form-group col-md-3">
                                             <label for="pajak" class="mr-sm-2">Pajak</label>
-                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right number-format" autocomplete="off" name="pajak" id="pajak"  value="0" class="form-control">
+                                            <input type="text" onkeypress="return number(event)"  class="form-control rounded text-right " autocomplete="off" name="pajak" id="pajak"  value="0" class="form-control">
                                             
                                         </div>
 
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="dibayar" class="mr-sm-2">Pembayaran Sebesar</label>
-                                        <input type="text" onkeypress="return number(event)"  class="form-control rounded number-format text-right"  autocomplete="off" name="dibayar" id="dibayar" value="0" class="form-control">
+                                        <input type="text" onkeypress="return number(event)"  class="form-control rounded  text-right"  autocomplete="off" name="dibayar" id="dibayar" value="0" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="inlineForm" class="mr-sm-2">Keterangan</label>

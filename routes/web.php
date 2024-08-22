@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
@@ -83,6 +84,7 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::get('laporan/', [LaporanController::class, 'index'])->name('laporan.index');
     Route::get('laporan/penjualan', [LaporanController::class, 'dataTablePenjualan'])->name('laporan.penjualan');
     Route::get('laporan/belanja', [LaporanController::class, 'dataTablePembelian'])->name('laporan.belanja');
+    Route::get('laporan/exportpembayaran', [ ExportController::class, 'LapPembayaran'])->name('laporan.exportpembayaran');
 
     // Manajemen User
     Route::get('management/', [AdminPanelController::class, 'index'])->name('management.index');
