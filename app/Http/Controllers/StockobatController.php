@@ -140,8 +140,6 @@ class StockobatController extends Controller
      }
 
      public function getDataObat(Request $request) {
-        
-
          $data = Stockobat::where('obat_id', $request->id)->first();
          return response()->json($data);
      }

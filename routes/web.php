@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
@@ -58,7 +59,10 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::post('stock/edits', [StockobatController::class, 'edits'])->name('stock.edits');
     Route::post('stock/hapus', [StockobatController::class, 'destroy'])->name('stock.hapus');
 
-    // Route::resource('penjualan', PenjualanController::class);
+    Route::get('opname/',  [OpnameController::class, 'index'])->name('opname.index');
+    Route::post('opname/store',  [OpnameController::class, 'store'])->name('opname.store');
+    // Route::get('opname/databeli',  [OpnameController::class, 'DataBeli'])->name('opname.databeli');
+    // Route::get('opname/datajual',  [OpnameController::class, 'DataJual'])->name('opname.datajual');
     
     Route::get('belanja/', [PembelianController::class, 'index'])->name('belanja.index');
     Route::post('belanja/store', [PembelianController::class, 'store'])->name('belanja.store');
@@ -85,6 +89,8 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::get('laporan/penjualan', [LaporanController::class, 'dataTablePenjualan'])->name('laporan.penjualan');
     Route::get('laporan/belanja', [LaporanController::class, 'dataTablePembelian'])->name('laporan.belanja');
     Route::get('laporan/exportpembayaran', [ ExportController::class, 'LapPembayaran'])->name('laporan.exportpembayaran');
+
+
 
     // Manajemen User
     Route::get('management/', [AdminPanelController::class, 'index'])->name('management.index');

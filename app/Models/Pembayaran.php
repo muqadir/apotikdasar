@@ -34,6 +34,7 @@ class Pembayaran extends Model
         ->select(
             'pembayarans.*', 
             'pembelians.tanggal',
+            'pembelians.qty',
             'suppliers.name as supplier',
             'users.name',
             'pembelians.item'
