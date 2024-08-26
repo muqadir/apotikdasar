@@ -6,11 +6,21 @@
     </x-slot>
 
     <div class="py-12 pt-0">
+        @if (Auth::user()->hasRole('gudang'))
+            
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">Stock Obat</h3>
+            </div>
+        </div>
+        @else
         <div class="card card-warning">
             <div class="card-header">
                 <h3 class="card-title">Stock Obat</h3>
             </div>
         </div>
+            
+        @endif
         <div class="max-w-full mx-auto sm:px-1 lg:px-1">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <table class="table table-stripped" id="tabelstock" style="width: 100%">
@@ -26,7 +36,12 @@
                             <th>Stock</th>
                             <th>Keterangan</th>
                             <th>user id</th>
-                            <th>Aksi</th>
+                            <th
+                                @if( \Laratrust::hasRole('kasir')) 
+                                hidden
+                                @endif
+                                > Aksi
+                            </th>
                         </tr>
                     </thead>
 

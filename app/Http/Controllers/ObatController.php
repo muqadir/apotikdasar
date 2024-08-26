@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
 use App\Models\Obat;
 use App\Models\Satuan;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class ObatController extends Controller
 {
@@ -18,8 +19,15 @@ class ObatController extends Controller
         if(request()->ajax()){
             return datatables()->of($data)
             ->addColumn('aksi', function($data){
-                $button = '<button class="edit btn btn-warning" id="'. $data->id.'" name="edit"> Edit</button>';
-                $button .= '<button class="hapus btn btn-danger" id="'. $data->id.'" name="hapus">Del</button>';
+
+                if (Auth::user()->hasRole('gudang')) {
+                    $button = '';
+                } else {
+                    
+                    $button = '<button class="edit btn btn-warning" id="'. $data->id.'" name="edit"> Edit</button>';
+                    $button .= '<button class="hapus btn btn-danger" id="'. $data->id.'" name="hapus">Del</button>';
+                }
+                
                 return $button;
             })
             ->rawColumns(['aksi'])

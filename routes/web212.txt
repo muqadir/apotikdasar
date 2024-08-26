@@ -47,12 +47,40 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::post('supplier/edits', [SupplierController::class, 'edits'])->name('supplier.edits');
     Route::post('supplier/hapus', [SupplierController::class, 'destroy'])->name('supplier.hapus');
     
+    // Route::get('obat/', [ObatController::class, 'index'])->name('obat.index');
+    // Route::post('obat/store', [ObatController::class, 'store'])->name('obat.store');
+    // Route::post('obat/updates', [ObatController::class, 'updates'])->name('obat.updates');
+    // Route::post('obat/edits', [ObatController::class, 'edits'])->name('obat.edits');
+    // Route::post('obat/hapus', [ObatController::class, 'destroy'])->name('obat.hapus');
+
+    // Route::get('stock/', [StockobatController::class, 'index'])->name('stock.index');
+    // Route::post('stock/store', [StockobatController::class, 'store'])->name('stock.store');
+    // Route::post('stock/updates', [StockobatController::class, 'updates'])->name('stock.updates');
+    // Route::post('stock/edits', [StockobatController::class, 'edits'])->name('stock.edits');
+    // Route::post('stock/hapus', [StockobatController::class, 'destroy'])->name('stock.hapus');
+
+    // Route::get('opname/',  [OpnameController::class, 'index'])->name('opname.index');
+    // Route::post('opname/store',  [OpnameController::class, 'store'])->name('opname.store');
+    // Route::get('opname/databeli',  [OpnameController::class, 'DataBeli'])->name('opname.databeli');
+    // Route::get('opname/datajual',  [OpnameController::class, 'DataJual'])->name('opname.datajual');
+    
     Route::get('belanja/', [PembelianController::class, 'index'])->name('belanja.index');
     Route::post('belanja/store', [PembelianController::class, 'store'])->name('belanja.store');
     Route::get('belanja/datapembelian', [PembelianController::class, 'DataPembelian'])->name('belanja.datapembelian');
     Route::post('belanja/hapus', [PembelianController::class, 'destroy'])->name('belanja.hapus');
 
-   
+
+    // Route::get('penjualan/', [PenjualanController::class, 'index'])->name('penjualan.index');
+    Route::post('penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
+    Route::post('penjualan/hapus', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
+    Route::get('penjualan/datapenjualan', [PenjualanController::class, 'DataPenjualan'])->name('penjualan.datapenjualan');
+    Route::post('penjualan/cetak', [PenjualanController::class, 'CetakNota'])->name('penjualan.cetak');
+
+    // Route::post('getobat', [StockobatController::class, 'getObat'])->name('stock.getobat');
+    // Route::post('getdataobat', [StockobatController::class, 'getDataObat'])->name('stock.getdataobat');
+    // Route::post('gethitung', [PenjualanController::class, 'getHitung'])->name('penjualan.gethitung');
+
+    
     Route::get('pembayaran/', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::post('pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
     Route::post('pembayaran/cetak', [PembayaranController::class, 'CetakNota'])->name('pembayaran.cetak');
@@ -61,6 +89,8 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
     Route::get('laporan/penjualan', [LaporanController::class, 'dataTablePenjualan'])->name('laporan.penjualan');
     Route::get('laporan/belanja', [LaporanController::class, 'dataTablePembelian'])->name('laporan.belanja');
     Route::get('laporan/exportpembayaran', [ ExportController::class, 'LapPembayaran'])->name('laporan.exportpembayaran');
+
+
 
     // Manajemen User
     Route::get('management/', [AdminPanelController::class, 'index'])->name('management.index');
@@ -85,11 +115,10 @@ Route::group([ 'middleware' => ['role:superadmin']], function() {
 Route::group([ 'middleware' => ['role:kasir|gudang|superadmin']], function() {
 
     Route::get('penjualan/', [PenjualanController::class, 'index'])->name('penjualan.index');
-    Route::post('penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
-    Route::post('penjualan/hapus', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
-    Route::get('penjualan/datapenjualan', [PenjualanController::class, 'DataPenjualan'])->name('penjualan.datapenjualan');
-    Route::post('penjualan/cetak', [PenjualanController::class, 'CetakNota'])->name('penjualan.cetak');
- 
+    // Route::post('penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
+    // Route::post('penjualan/hapus', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
+    // Route::get('penjualan/datapenjualan', [PenjualanController::class, 'DataPenjualan'])->name('penjualan.datapenjualan');
+    // Route::post('penjualan/cetak', [PenjualanController::class, 'CetakNota'])->name('penjualan.cetak');
 
     Route::get('stock/', [StockobatController::class, 'index'])->name('stock.index');
     // Route::post('stock/store', [StockobatController::class, 'store'])->name('stock.store');

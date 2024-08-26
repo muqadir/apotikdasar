@@ -21,8 +21,16 @@ class StockobatController extends Controller
         if(request()->ajax()){
             return datatables()->of($stock)
             ->addColumn('aksi', function($stock){
-                $button = '<button class="edit btn btn-warning" id="'. $stock->id.'" name="edit"> Edit</button>';
-                $button .= '<button class="hapus btn btn-danger" id="'. $stock->id.'" name="hapus">Del</button>';
+                if (Auth::user()->hasRole('kasir')) {
+                    $button = '';
+                } else if (Auth::user()->hasRole('gudang')) {
+                    $button = '<button class="edit btn btn-success" id="'. $stock->id.'" name="edit"> Edit</button>';
+                }else  {
+                    $button = '<button class="edit btn btn-warning" id="'. $stock->id.'" name="edit"> Edit</button>';
+                    $button .= '<button class="hapus btn btn-danger" id="'. $stock->id.'" name="hapus">Del</button>';
+                }
+                
+               
                 return $button;
             })
             ->rawColumns(['aksi'])

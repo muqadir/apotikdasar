@@ -145,12 +145,6 @@
                           <p>Suplayer</p>
                         </a>
                       </li>
-                      {{-- <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="fas fa-shopping-basket nav-icon"></i>
-                          <p>Category Produc</p>
-                        </a>
-                      </li> --}}
                       <li class="nav-item">
                         <a href="{{ route('obat.index') }}" class="nav-link">
                           <i class="fas fa-shopping-basket nav-icon"></i>
@@ -164,31 +158,18 @@
                           <p>Stock Obat</p>
                         </a>
                       </li>
-                      {{-- <li class="nav-item">
-                        <a href="pages/layout/boxed.html" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Data Pengeluaran</p>
-                        </a>
-                      </li> --}}
                       <li class="nav-item">
                         <a href="{{ route('pembayaran.index') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Data Penjualan</p>
                         </a>
                       </li>
-                      {{-- <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Data Supplier</p>
-                        </a>
-                      </li> --}}
                       <li class="nav-item">
                         <a href="{{ route('opname.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-laptop-medical"></i>
                           <p>Opname Barang</p>
                         </a>
                       </li>
-        
                     </ul>
                   </li>
         
@@ -223,10 +204,6 @@
         
                     </ul>
                   </li>
-        
-        
-        
-        
                   <li class="nav-header">Setting</li>
         
         
@@ -243,9 +220,9 @@
                       <p>User Management</p>
                     </a>
                   </li>
-                  @endrole
+                @endrole
         
-                  @role('gudang|helper_gudang|role_kasir')
+                @role('gudang|helper_gudang|role_kasir')
                   <li class="nav-item">
                     <a href="{{ route('obat.index')}}" class="nav-link">
                       <i class="nav-icon fas fa-shopping-basket"></i>
@@ -253,35 +230,35 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('stock.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tablets"></i>
         
                       <p>Stock Obat</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('opname.index') }}" class="nav-link">
                       <i class="nav-icon fas fa-laptop-medical"></i>
                       <p>Opname Barang</p>
                     </a>
                   </li>
-                  @endrole
+                @endrole
         
-                  @role('kasir')
+                @role('kasir')
         
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('stock.index') }}" class="nav-link">
                       <i class="nav-icon fas fa-database"></i>
                       <p>Stock Obat</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('penjualan.index') }}" class="nav-link">
                       <i class="nav-icon fas fa-shopping-basket"></i>
                       <p>Transaksi Penjualan</p>
                     </a>
                   </li>
-                  @endrole
+                @endrole
                 </ul>
               </nav>
               <!-- /.sidebar-menu -->

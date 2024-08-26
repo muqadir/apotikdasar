@@ -19,7 +19,6 @@ class OpnameController extends Controller
 
     public function store(Request $request) 
     {
-        // dd($request->all());
         $data = [
             'obat_id' => $request->obat_id,
             'stock'   => $request->real,
