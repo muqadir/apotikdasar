@@ -67,7 +67,8 @@
                                     <div class="row">
                                         <div class="form-group col-md-3">
                                             <label for="item" class="mr-sm-2">Nama Barang</label>
-                                            <input type="text" class="form-control rounded " autocomplete="off" name="item" id="item" class="form-control rounded">
+                                            <input type="text" class="form-control rounded " autocomplete="off" name="item" id="item" class="form-control rounded" hidden>
+                                            <input type="text" class="form-control rounded " autocomplete="off" name="nm_obat" id="nm_obat" class="form-control rounded">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="harga" class="mr-sm-2">Harga @ Satuan</label>
@@ -315,9 +316,11 @@ function number(evt) {
                  _token :  "{{ csrf_token() }}"
             }, success : function(res){
                 if (res.length > 0){
-                    $('#item').val(res[0].name);
+                    $('#item').val(res[0].id);
+                    $('#nm_obat').val(res[0].name);
                 } else {
                     $('#item').val(null);  
+                    $('#nm_obat').val(null);  
                 }
                 console.log(res);
             }, error : function(xhr){
@@ -333,6 +336,7 @@ function number(evt) {
         $('#supplier_id').prop('disabled', false);
         $('#kode').prop('disabled', false);
         $('#item').attr('disabled', false);
+        $('#nm_obat').attr('disabled', false);
         $('#harga').attr('disabled', false);
         $('#qty').attr('disabled', false);
         $('#subtotal').attr('disabled', false);
@@ -368,6 +372,7 @@ function number(evt) {
                 $('#supplier_id').prop('disabled', true);
                 $('#kode').prop('disabled', true);
                 $('#item').attr('disabled', true);
+                $('#nm_obat').attr('disabled', true);
                 $('#harga').attr('disabled', true);
                 $('#qty').attr('disabled', true);
                 $('#subtotal').attr('disabled', true);

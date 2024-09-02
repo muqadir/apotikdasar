@@ -20,7 +20,7 @@ class CreatePembeliansTable extends Migration
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('user_id');
             // $table->string('kode', 8);
-            $table->string('item', 20);
+            $table->integer('item');
             $table->decimal('harga', 9, 2);
             $table->integer('qty');
             $table->decimal('totalkotor', 9, 2); // Ganti dari 'subtotal'

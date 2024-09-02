@@ -92,10 +92,10 @@ Route::group([ 'middleware' => ['role:kasir|gudang|superadmin']], function() {
  
 
     Route::get('stock/', [StockobatController::class, 'index'])->name('stock.index');
-    // Route::post('stock/store', [StockobatController::class, 'store'])->name('stock.store');
-    // Route::post('stock/updates', [StockobatController::class, 'updates'])->name('stock.updates');
-    // Route::post('stock/edits', [StockobatController::class, 'edits'])->name('stock.edits');
-    // Route::post('stock/hapus', [StockobatController::class, 'destroy'])->name('stock.hapus');
+    Route::post('stock/store', [StockobatController::class, 'store'])->name('stock.store');
+    Route::post('stock/updates', [StockobatController::class, 'updates'])->name('stock.updates');
+    Route::post('stock/edits', [StockobatController::class, 'edits'])->name('stock.edits');
+    Route::post('stock/hapus', [StockobatController::class, 'destroy'])->name('stock.hapus');
 
 
 });
@@ -108,10 +108,5 @@ Route::group([ 'middleware' => ['role:gudang|superadmin']], function() {
 
     Route::get('opname/',  [OpnameController::class, 'index'])->name('opname.index');
     Route::post('opname/store',  [OpnameController::class, 'store'])->name('opname.store');
-
-    Route::post('stock/store', [StockobatController::class, 'store'])->name('stock.store');
-    Route::post('stock/updates', [StockobatController::class, 'updates'])->name('stock.updates');
-    Route::post('stock/edits', [StockobatController::class, 'edits'])->name('stock.edits');
-    Route::post('stock/hapus', [StockobatController::class, 'destroy'])->name('stock.hapus');
 });
 
