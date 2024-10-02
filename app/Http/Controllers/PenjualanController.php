@@ -217,6 +217,7 @@ class PenjualanController extends Controller
 
     }
 
+    
     public function CetakNota(Request $request)
     {
         if (Auth::user()->isAbleTo('penjualan-read')) {
@@ -240,5 +241,6 @@ class PenjualanController extends Controller
             abort(403);
         }
 
-    }   
+    } 
+
 }
